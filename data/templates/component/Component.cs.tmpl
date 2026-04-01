@@ -1,0 +1,53 @@
+using System;
+using Tizen.NUI;
+using Tizen.NUI.BaseComponents;
+
+namespace {{NAMESPACE}}
+{
+    public class {{NAME}} : View
+    {
+        private readonly View _inner;
+
+        public {{NAME}}(float width, float height)
+        {
+            Focusable = true;
+            Size = new Size(width, height);
+
+            _inner = new View
+            {
+                Size = new Size(width, height),
+                CornerRadius = 12f,
+                BackgroundColor = new Color(1f, 1f, 1f, 0.05f),
+                BorderlineWidth = 1f,
+                BorderlineColor = new Color(1f, 1f, 1f, 0.1f),
+            };
+            Add(_inner);
+
+            FocusGained += OnFocusGained;
+            FocusLost += OnFocusLost;
+            KeyEvent += OnKeyEvent;
+        }
+
+        private void OnFocusGained(object sender, EventArgs e)
+        {
+            _inner.BorderlineWidth = 3f;
+            _inner.BorderlineColor = new Color(192 / 255f, 132 / 255f, 252 / 255f, 1f);
+        }
+
+        private void OnFocusLost(object sender, EventArgs e)
+        {
+            _inner.BorderlineWidth = 1f;
+            _inner.BorderlineColor = new Color(1f, 1f, 1f, 0.1f);
+        }
+
+        private bool OnKeyEvent(object sender, KeyEventArgs e)
+        {
+            if (e.Key.State == Key.StateType.Down &&
+                (e.Key.KeyPressedName == "Return" || e.Key.KeyPressedName == "Enter"))
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+}

@@ -1,0 +1,40 @@
+using System;
+using Tizen.NUI;
+using Tizen.NUI.BaseComponents;
+
+namespace {{NAME}}
+{
+    public class App : NUIApplication
+    {
+        private View _rootView;
+
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+
+            var win = Window.Instance;
+            win.BackgroundColor = new Color(15 / 255f, 23 / 255f, 42 / 255f, 1f);
+            win.KeyEvent += OnKeyEvent;
+
+            FocusManager.Instance.EnableDefaultAlgorithm(true);
+            FocusManager.Instance.FocusIndicator = new View { Opacity = 0 };
+
+            _rootView = new View
+            {
+                Size = new Size({{WIDTH}}, {{HEIGHT}}),
+                Layout = new AbsoluteLayout()
+            };
+            win.Add(_rootView);
+        }
+
+        private void OnKeyEvent(object sender, Window.KeyEventArgs e)
+        {
+            if (e.Key.State != Key.StateType.Down) return;
+
+            if (e.Key.KeyPressedName == "Escape" || e.Key.KeyPressedName == "XF86Back")
+            {
+                Exit();
+            }
+        }
+    }
+}

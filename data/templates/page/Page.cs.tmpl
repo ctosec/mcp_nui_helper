@@ -1,0 +1,31 @@
+using System;
+using Tizen.NUI;
+using Tizen.NUI.BaseComponents;
+
+namespace {{NAMESPACE}}
+{
+    public class {{NAME}} : View
+    {
+        private readonly App _app;
+
+        public {{NAME}}(App app)
+        {
+            _app = app;
+            BackgroundColor = new Color(0f, 0f, 0f, 0f);
+            Layout = new AbsoluteLayout();
+            Size = new Size({{WIDTH}}, {{HEIGHT}});
+
+            var main = new View
+            {
+                Size = new Size({{WIDTH}}, {{HEIGHT}}),
+                Padding = new Extents(80, 80, 80, 80),
+                Layout = new LinearLayout
+                {
+                    LinearOrientation = LinearLayout.Orientation.Vertical,
+                }
+            };
+
+            Add(main);
+        }
+    }
+}

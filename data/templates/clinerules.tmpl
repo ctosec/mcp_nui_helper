@@ -1,0 +1,23 @@
+# Tizen NUI Project Rules
+
+## Required
+- All UI must be written in C# code. Do NOT use XAML.
+- Do NOT use Xamarin.Forms, MAUI, WPF, or WinForms namespaces.
+- Do NOT change the package versions in the .csproj file.
+
+## MCP Tools Usage
+- When unsure about a widget API, call the `lookup_widget` tool.
+- When creating new pages/components, use the `scaffold` tool.
+- After writing code, validate with the `validate_code` tool.
+- For focus, animation, gradient patterns, call the `get_pattern` tool.
+
+## TV Development Rules
+- Resolution: 1920x1080.
+- All interactive elements must have Focusable = true.
+- Provide visual feedback with FocusGained/FocusLost event handlers.
+- Handle key events: Return/Enter (select), Escape/XF86Back (back).
+- Always call SetCurrentFocusView inside a Timer callback.
+
+## Resource Management
+- After Remove(), always call Dispose().
+- After using Animation/Timer, call Stop() + Dispose().
