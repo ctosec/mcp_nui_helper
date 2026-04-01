@@ -1,0 +1,80 @@
+{
+  "widgets": [
+    {
+      "name": "View",
+      "namespace": "Tizen.NUI.BaseComponents",
+      "inherits": null,
+      "category": "basic",
+      "description": "The base class for all NUI views.",
+      "properties": [
+        { "name": "Size", "type": "Size", "description": "The size of the view." },
+        { "name": "Position", "type": "Position", "description": "The position of the view." },
+        { "name": "BackgroundColor", "type": "Color", "description": "The background color." },
+        { "name": "Opacity", "type": "float", "description": "The opacity (0.0 ~ 1.0)." },
+        { "name": "CornerRadius", "type": "float", "description": "The corner radius." },
+        { "name": "Focusable", "type": "bool", "description": "Whether the view can receive focus." },
+        { "name": "Padding", "type": "Extents", "description": "The padding." },
+        { "name": "Margin", "type": "Extents", "description": "The margin." },
+        { "name": "Layout", "type": "LayoutItem", "description": "The layout of the view." },
+        { "name": "BorderlineWidth", "type": "float", "description": "The borderline width." },
+        { "name": "BorderlineColor", "type": "Color", "description": "The borderline color." },
+        { "name": "BorderlineOffset", "type": "float", "description": "The borderline offset (-1 to 1)." },
+        { "name": "ClippingMode", "type": "ClippingModeType", "description": "The clipping mode." }
+      ],
+      "events": [
+        { "name": "FocusGained", "signature": "EventHandler<EventArgs>", "description": "Fired when focus is gained." },
+        { "name": "FocusLost", "signature": "EventHandler<EventArgs>", "description": "Fired when focus is lost." },
+        { "name": "KeyEvent", "signature": "EventHandler<KeyEventArgs>", "description": "Fired when a key event occurs." }
+      ],
+      "methods": [
+        { "name": "Add", "signature": "void Add(View child)", "description": "Add a child view." },
+        { "name": "Remove", "signature": "void Remove(View child)", "description": "Remove a child view." },
+        { "name": "Dispose", "signature": "void Dispose()", "description": "Dispose the view and release resources." }
+      ],
+      "example": "var view = new View\n{\n    Size = new Size(400, 300),\n    BackgroundColor = new Color(1f, 1f, 1f, 1f),\n    Layout = new LinearLayout\n    {\n        LinearOrientation = LinearLayout.Orientation.Vertical\n    }\n};"
+    },
+    {
+      "name": "TextLabel",
+      "namespace": "Tizen.NUI.BaseComponents",
+      "inherits": "View",
+      "category": "basic",
+      "description": "A view for displaying text.",
+      "properties": [
+        { "name": "Text", "type": "string", "description": "The text to display." },
+        { "name": "PointSize", "type": "float", "description": "The font size in points." },
+        { "name": "TextColor", "type": "Color", "description": "The text color." },
+        { "name": "FontFamily", "type": "string", "description": "The font family name." },
+        { "name": "MultiLine", "type": "bool", "description": "Whether multi-line is enabled." },
+        { "name": "Ellipsis", "type": "bool", "description": "Whether ellipsis is enabled." },
+        { "name": "HorizontalAlignment", "type": "HorizontalAlignment", "description": "Horizontal text alignment." },
+        { "name": "VerticalAlignment", "type": "VerticalAlignment", "description": "Vertical text alignment." }
+      ],
+      "events": [],
+      "methods": [],
+      "example": "var label = new TextLabel\n{\n    Text = \"Hello\",\n    PointSize = 20f,\n    TextColor = new Color(1f, 1f, 1f, 1f),\n    FontFamily = \"SamsungOneUI\"\n};"
+    },
+    {
+      "name": "ImageView",
+      "namespace": "Tizen.NUI.BaseComponents",
+      "inherits": "View",
+      "category": "media",
+      "description": "A view for displaying an image.",
+      "properties": [
+        { "name": "ResourceUrl", "type": "string", "description": "The URL of the image resource." },
+        { "name": "Image", "type": "PropertyMap", "description": "The image property map. Do NOT assign a string to this." },
+        { "name": "DesiredWidth", "type": "int", "description": "The desired image width." },
+        { "name": "DesiredHeight", "type": "int", "description": "The desired image height." }
+      ],
+      "events": [],
+      "methods": [],
+      "example": "var img = new ImageView\n{\n    Size = new Size(320, 240),\n    ResourceUrl = \"https://example.com/photo.jpg\",\n    DesiredWidth = 320,\n    DesiredHeight = 240\n};"
+    }
+  ],
+  "categories": {
+    "basic": ["View", "TextLabel", "ImageView"],
+    "layout": ["LinearLayout", "GridLayout", "AbsoluteLayout", "FlexLayout"],
+    "input": ["TextField", "TextEditor", "Button", "CheckBox", "RadioButton"],
+    "container": ["ScrollableBase", "RecyclerView", "Window"],
+    "media": ["ImageView", "VideoView", "LottieAnimationView"]
+  }
+}

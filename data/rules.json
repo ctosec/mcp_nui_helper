@@ -1,0 +1,69 @@
+{
+  "rules": [
+    {
+      "id": "NUI001",
+      "severity": "error",
+      "category": "wrong_api",
+      "pattern": "\\.Image\\s*=\\s*\"",
+      "message": "ImageView.Image는 PropertyMap 타입입니다. 문자열 경로는 ResourceUrl을 사용하세요.",
+      "wrong": "imageView.Image = \"icon.png\"",
+      "correct": "imageView.ResourceUrl = \"icon.png\""
+    },
+    {
+      "id": "NUI100",
+      "severity": "error",
+      "category": "wrong_framework",
+      "pattern": "using Xamarin\\.Forms|using Microsoft\\.Maui",
+      "message": "Xamarin.Forms/MAUI가 아닌 Tizen.NUI를 사용해야 합니다.",
+      "wrong": "using Xamarin.Forms;",
+      "correct": "using Tizen.NUI;\nusing Tizen.NUI.BaseComponents;"
+    },
+    {
+      "id": "NUI101",
+      "severity": "error",
+      "category": "wrong_framework",
+      "pattern": "using System\\.Windows\\.Forms|using System\\.Windows\\.Controls",
+      "message": "WPF/WinForms가 아닌 Tizen.NUI를 사용해야 합니다.",
+      "wrong": "using System.Windows.Forms;",
+      "correct": "using Tizen.NUI;\nusing Tizen.NUI.BaseComponents;"
+    },
+    {
+      "id": "NUI200",
+      "severity": "warning",
+      "category": "missing_pattern",
+      "pattern": "\\.Remove\\(",
+      "contextNegative": "\\.Dispose\\(",
+      "message": "View를 Remove한 후 Dispose()를 호출하지 않았습니다. 메모리 누수를 방지하려면 Remove 후 Dispose()를 호출하세요.",
+      "wrong": "parent.Remove(child);",
+      "correct": "parent.Remove(child);\nchild.Dispose();"
+    },
+    {
+      "id": "NUI201",
+      "severity": "warning",
+      "category": "missing_pattern",
+      "pattern": "System\\.Threading\\.Timer|new Timer\\(\\)",
+      "message": "System.Threading.Timer가 아닌 Tizen.NUI.Timer를 사용하세요. NUI Timer는 UI 스레드에서 실행됩니다.",
+      "wrong": "var timer = new System.Threading.Timer(...);",
+      "correct": "var timer = new Timer(200);\ntimer.Tick += (s, e) => { /* ... */ return false; };\ntimer.Start();"
+    },
+    {
+      "id": "NUI300",
+      "severity": "error",
+      "category": "csproj",
+      "pattern": "Tizen\\.NET\\.Sdk.*Version=\"(?!1\\.1\\.9\")",
+      "message": "Tizen.NET.Sdk 버전은 1.1.9를 사용하세요. 다른 버전은 VBS 빌드 실패를 유발합니다.",
+      "wrong": "<PackageReference Include=\"Tizen.NET.Sdk\" Version=\"1.2.0\" />",
+      "correct": "<PackageReference Include=\"Tizen.NET.Sdk\" Version=\"1.1.9\" />"
+    },
+    {
+      "id": "NUI400",
+      "severity": "warning",
+      "category": "tv_pattern",
+      "pattern": "Focusable\\s*=\\s*true",
+      "contextNegative": "FocusGained|FocusLost|KeyEvent",
+      "message": "Focusable=true를 설정했지만 FocusGained/FocusLost/KeyEvent 핸들러가 없습니다. TV에서 포커스 시각적 피드백이 필요합니다.",
+      "wrong": "var btn = new View { Focusable = true };",
+      "correct": "var btn = new View { Focusable = true };\nbtn.FocusGained += (s, e) => { /* highlight */ };\nbtn.FocusLost += (s, e) => { /* unhighlight */ };\nbtn.KeyEvent += (s, e) => { /* handle Enter/Return */ return false; };"
+    }
+  ]
+}
